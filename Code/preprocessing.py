@@ -1,6 +1,7 @@
 import pandas as pd
 import time
 import datetime
+
 pd.set_option('display.max_columns', None)
 
 # Section cleans up datasets, dropping NaNs and converting dates to epoch time
@@ -31,11 +32,11 @@ dict.pop(11)
 print(dict)
 # Section merges datasets
 dataset = pd.merge(laertis,openweather,how='outer',on="timestamp")
-dataset = dataset.interpolate(method='cubic', axis=0)
+dataset = dataset.interpolate(method='nearest', axis=0)
 
 print(dataset.head(1))
 
 dataset = dataset[dataset['weather_id'].notna()]
 dataset = dataset[dataset['Laertis_humidity'].notna()]
 dataset.to_csv('Products/dataset.csv', sep = ';', header = dict, index = False)
-# weather_id,'''
+# # weather_id,'''
